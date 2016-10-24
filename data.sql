@@ -1,17 +1,17 @@
 INSERT INTO staff VALUES
-('100','D','Doctor Who', 'jammydodger','iwantmywife'),
-('101','D','Peter Griffin', 'peterpumpkineater','clam'),
-('102','D','Chris Griffin', 'popsicles','1234'),
-('103','D','Meg Griffin', 'pinkhat','0000'),
-('123','N','Sheldon Cooper','physicsnerd','amy'),
-('124','N','Spongebob Squarepants','frycook','patties'),
+('100','D','Doctor Who', 'jammydodger','ihatedaleks'),
+('101','D','Dr.Doofenshmirtz', 'SQLinator','damnyouperry'),
+('102','D','Dr.Elmer Hartman', 'askwebMD','1234'),
+('103','D','Sheldon Cooper','physicsnerd','amy'),
+('123','N','Meg Griffin', 'pinkhat','0000'),
+('124','N','Sponge Bob','frycook','patties'),
 ('125','N','Patrick Star','icantseemyforehead','duuuh'),
 ('126','N','Eugene Krabs','moneeey','pennypincher'),
 ('127','N','Sandy Cheeks','acornmuncher','hiya'),
-('200','A','Lois Griffin','ihatedaleks','41625'),
+('200','A','Lois Griffin','ohpeter','password'),
 ('201','A','Amelia Pond','thegirlwhowaited','41625'),
-('202','A','Rory Roman','iheartamy','41625'),
-('203','A','River Song','spoilers','41625');
+('202','A','Rory Williams','iheartamy','46256'),
+('203','A','River Song','spoilers','hellosweetie');
 
 Insert Into patients VALUES
 ('10000', 'Dalek', '18-35', '1414 Edmonton, Alberta', '7801001000', '7809999966'),
@@ -74,7 +74,10 @@ INSERT INTO medications VALUES
 ('10002','002','100','2010-03-07','2010-03-07','2010-04-07',300,'Ibuprofen'),
 ('10003','003','103','2011-01-25','2011-01-25','2011-01-30',1,'Hemp'),
 ('10004','004','102','2011-04-26','2011-04-26','2011-05-15',7,'Hemp'),
-('10006','006','101','2011-06-17','2011-06-17','2011-06-20',50,'Aspirin');
+('10006','006','101','2011-06-17','2011-06-17','2011-06-20',50,'Aspirin'),
+('10007','007','100','2011-01-20','2011-01-20','2011-01-25',25,'Vicodin'),
+('10007','007','100','2011-02-20','2011-02-20','2011-02-26',50,'Vicodin'),
+('10007','007','100','2011-03-20','2011-03-20','2011-03-27',100,'Vicodin');
 
 INSERT INTO reportedallergies VALUES 
 ('10000','Vicodin'),
