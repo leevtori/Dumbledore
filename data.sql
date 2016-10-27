@@ -14,14 +14,14 @@ INSERT INTO staff VALUES
 ('203','A','River Song','spoilers','hellosweetie');
 
 Insert Into patients VALUES
-('10000', 'Dalek', '18-35', '1414 Edmonton, Alberta', '7801001000', '7809999966'),
+('10000', 'Dalek', '19-35', '1414 Edmonton, Alberta', '7801001000', '7809999966'),
 ('10001', 'Silence', '0-18', '1313 Edmonton, Alberta', '7801001001', '7809996666'),
 ('10002', 'Angel', '0-18', '1515 Edmonton, Alberta', '7801001002', '7806666999'),
-('10003', 'Tardis', '45-60', '1616 Edmonton, Alberta', '7801001003', '7801111444'),
-('10004', 'Melody Pond', '45-60', '1717 Edmonton, Alberta', '7801001004', '7804444111'),
+('10003', 'Tardis', '36-60', '1616 Edmonton, Alberta', '7801001003', '7801111444'),
+('10004', 'Melody Pond', '36-60', '1717 Edmonton, Alberta', '7801001004', '7804444111'),
 ('10005', 'Prisoner Zero', '0-18', '1818 Calgary, Alberta', '7801001005', '7804545131'),
-('10006', 'Pandorica', '18-35', '1919 Calgary, Alberta', '7801001006', '7805555555'),
-('10007', 'Silurian', '45-60', '1919 Calgary, Alberta', '7801001007', '7805555464');
+('10006', 'Pandorica', '19-35', '1919 Calgary, Alberta', '7801001006', '7805555555'),
+('10007', 'Silurian', '36-60', '1919 Calgary, Alberta', '7801001007', '7805555464');
 
 INSERT INTO charts Values
 ('000','10000', '2010-10-02', '2010-10-16'),
@@ -88,7 +88,28 @@ INSERT INTO inferredallergies VALUES
 ('Vicodin','Ibuprofen'),
 ('Cocaine','Xanax');
 
-
+INSERT INTO dosage VALUES
+('Aspirin','0-18',2),
+('Aspirin','19-35',4),
+('Aspirin','36-60',4),
+('Vicodin','0-18',1),
+('Vicodin','19-35',2),
+('Vicodin','36-60',3),
+('Ibuprofen','0-18',2),
+('Ibuprofen','19-35',4),
+('Ibuprofen','36-60',5),
+('Xanax', '0-18',1),
+('Xanax', '19-35',2),
+('Xanax', '36-60',2),
+('Diazepan','0-18',3),
+('Diazepan','19-35',5),
+('Diazepan','36-60',10),
+('Hemp','0-18',1),
+('Hemp','19-35',3),
+('Hemp','36-60',4),
+('Cocaine','0-18',1),
+('Cocaine','19-35',5),
+('Cocaine','36-60',10);
 
 
 
