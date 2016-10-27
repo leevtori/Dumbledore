@@ -1,7 +1,7 @@
 #from doctor import *
 from admin import *
 
-user = ['A',5]
+user = ['A']
 # commands:
 DOC = ['search', 'add']
 NURSE = []
