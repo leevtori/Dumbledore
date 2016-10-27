@@ -85,12 +85,8 @@ def admin_query4():
     
 
 #MAIN-----------------------------------------------------------
-admin_query1()
-admin_query2()
-admin_query3()
-admin_query4()
 
-conn.close()
+
 
 
 
