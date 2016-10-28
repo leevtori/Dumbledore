@@ -83,7 +83,7 @@ def create_chart(patient):
 
 # 3. same as doctors 1
 
-def get_chart():
+def nurse_q3():
     patient = raw_input("Enter patient health care number or 0 to exit: ")
 
     while not patient.isdigit():
@@ -125,7 +125,7 @@ def list_entries(chart_id, patient):
 
 # 4, Same as Doctors 2
 
-def add_line():
+def nurse_q4():
     patient = raw_input("Enter patient HCN: ")
     chart = raw_input("Enter chart ID: ")
 
