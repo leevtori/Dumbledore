@@ -12,7 +12,7 @@ while not user:
 
 # commands:
 DOC = ['search', 'add']
-NURSE = []
+NURSE = ['close_chart', 'create_chart']
 ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
 
 # After user logs in, continuously ask what to do until they log out.
@@ -70,4 +70,10 @@ while True:
 
           #NURSE
      elif user[1] == "N":
-          pass
+          if op == "close_chart":
+               nurse_q1()
+          elif op == "create_chart":
+               nurse_q2()
+          elif op == "logout":
+               print "Goodbye!"
+               break          
