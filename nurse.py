@@ -182,7 +182,7 @@ def list_entries(chart_id, patient):
 
 # 4, Same as Doctors 2
 
-def nurse_q4():
+def nurse_q4(sid):
     patient = raw_input("Enter patient HCN: ")
     chart = raw_input("Enter chart ID: ")
 
@@ -193,4 +193,5 @@ def nurse_q4():
 
     else:
         content = raw_input("Enter the content of the chart: ")
-        c.execute("INSERT INTO symptoms VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' ) ;".format (patient, chart, user[1], content) )
+        c.execute("INSERT INTO symptoms VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' ) ;".format (patient, chart, sid, content) )
+        conn.commit()

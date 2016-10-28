@@ -3,6 +3,7 @@ import hashlib
 import re
 import getpass
 import sqlite3
+from create_user import *
 
 # This function prompts the user for a login and password. It assumes that
 # the username can only contain letters a-z, numbers 0-9 and underscores.
@@ -32,10 +33,34 @@ def authenticate():
         return
     else:
         print "Welcome, " + info[2]
+        # commands:
+        DOC = ['search', 'add']
+        NURSE = ['close_chart', 'create_chart', 'list_all', 'add_symptom']
+        ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
+        
+        # After user logs in, continuously ask what to do until they log out.
+        if info[1] == "D":
+            print "you are a doctor"
+            print "Available operations: ",
+            print ', '.join(DOC)
+        elif info[1] == "N":
+            print "You are a nurse"
+            print "Available operations: ",
+            print ', '.join(NURSE)
+        else:
+            print "You are an admin"
+            print "Available operations: ",
+            print ', '.join(ADMIN)
+
 
     return (info[1], info[3])
 
+def new_user():
+    create_user()
+
+
+
 # user log in
-user = None
-while not user:
-    user = authenticate()
+#user = None
+#while not user:
+#    user = authenticate()

@@ -54,7 +54,7 @@ def list_entries(chart_id, patient):
 # diagnosis. The date ddate should be set to the current date and time.
 
 # add_line function is used for 2 and 3 and calls another function for 4
-def add_line(Ctype):
+def add_line(Ctype,sid):
     patient = raw_input("Enter patient HCN: ")
     chart = raw_input("Enter chart ID: ")
 
@@ -67,11 +67,11 @@ def add_line(Ctype):
         content = raw_input("Enter the content of the chart: ")
 
     if Ctype == "S":
-        c.execute("INSERT INTO symptoms VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' ) ;".format (patient, chart, user[1], content) )
+        c.execute("INSERT INTO symptoms VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' ) ;".format (patient, chart,sid, content) )
     elif Ctype == "D":
-        c.execute("INSERT INTO diagnoses VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' );".format (patient, chart, user[1], content))
+        c.execute("INSERT INTO diagnoses VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' );".format (patient, chart, sid, content))
     else:
-        add_med(patient, chart)
+        add_med(patient, chart,sid)
     conn.commit()
 
 # 4. For a given patient and an open chart of the patient add an entry for
@@ -92,7 +92,7 @@ def add_line(Ctype):
 # to and from which it can be "inferred"that the patient may also be allergic
 # to drug_name.
 
-def add_med(patient, chart):
+def add_med(patient, chart,sid):
     drug_name = raw_input("Enter drug name or '0' to exit: ")
     if drug_name == '0': return
     # Check that drug exists.
@@ -147,4 +147,5 @@ def add_med(patient, chart):
     while not re.match('((19|20)\d\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])', end):
         end = raw_input("Invalid date. Enter end date (YYYY-MM-DD): ")
 
-    c.execute("INSERT INTO medications VALUES ('{0}' , '{1}' , '{2}', datetime('now') , '{3}' , '{4}' , '{5}' , '{6}') ;".format(patient, chart, user[1] , start, end , amount , drug_name))
+    c.execute("INSERT INTO medications VALUES ('{0}' , '{1}' , '{2}', datetime('now') , '{3}' , '{4}' , '{5}' , '{6}') ;".format(patient, chart, sid , start, end , amount , drug_name))
+    conn.commit()
