@@ -37,6 +37,6 @@ def authenticate():
 
     return (info[1], info[2])
 
-user = None
-while not user:
-    user = authenticate()
+#user = None
+#while not user:
+#    user = authenticate()

@@ -4,11 +4,11 @@ from admin import *
 from nurse import *
 
 # user log in
-#user = None
-#while not user:
-#    user = authenticate()
-# user[0] = role
-# user[1] = staff id
+user = None
+while not user:
+     user = authenticate()
+# user[0] = name
+# user[1] = role
 
 # commands:
 DOC = ['search', 'add']
@@ -17,7 +17,7 @@ ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
 
 # After user logs in, continuously ask what to do until they log out.
 print "Available operations: ",
-if user[0] == "D":
+if user[1] == "D":
      print ' ,'.join(DOC)
 elif user[1] == "N":
      print ' ,'.join(NURSE)
@@ -26,8 +26,11 @@ else:
 
 while True:
      op = raw_input("Please enter an operation or 'logout' to quit: ").lower()
+     if op == "logout":
+          print "Goodbye!"
+          break
      #Doctors
-     if user[0] == "D":
+     if user[1] == "D":
           if op == "search":
                get_chart()
           elif op == "add":
@@ -49,7 +52,7 @@ while True:
                print "Invalid Command"
 
      #ADMIN
-     if user[0] == "A":
+     if user[1] == "A":
           if op == "doctor_sum":
                admin_query1()
 
@@ -66,5 +69,5 @@ while True:
                break
 
           #NURSE
-     elif user[0] == "N":
+     elif user[1] == "N":
           pass
