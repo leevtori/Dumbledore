@@ -21,22 +21,21 @@ def authenticate():
         print ("Error: Invalid username.")
         return
 
-    username = username.lower()
-
     password = getpass.getpass("Please enter your password: ")
 
     password = hashlib.sha224(password).hexdigest()
-    c.execute("SELECT password, name, role FROM staff WHERE login = :username ;", {"username":username})
+    c.execute("SELECT password, role, name , staff_id FROM staff WHERE login LIKE :username ;", {"username":username})
     info = c.fetchone()
 
     if not info or info[0] != password:
         print "Incorrect login or password"
         return
     else:
-        print "Welcome, " + info[1]
+        print "Welcome, " + info[2]
 
-    return (info[1], info[2])
+    return (info[1], info[3])
 
-#user = None
-#while not user:
-#    user = authenticate()
+# user log in
+user = None
+while not user:
+    user = authenticate()

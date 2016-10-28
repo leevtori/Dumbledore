@@ -48,36 +48,23 @@ def list_entries(chart_id, patient):
         print " ".join(entry)
     return
 
-
 # 2. For a given patient and an open chart of the patient add an entry for
 # symptoms. The date obs_date should be set to the current date and time.
 # 3. For a given patient and an open chart of the patient add an entry for
 # diagnosis. The date ddate should be set to the current date and time.
 
-<<<<<<< HEAD
 # add_line function is used for 2 and 3 and calls another function for 4
-=======
-def add_symptom(patient, chart, ):
-    # ('10000', '000','123', '2010-10-02','uncontrollable gas' )
-   # time = datetime.now().isoformat()
-   # line = patient chart user[3] time
->>>>>>> 25fdc5ace2511a86465b77890fdd10650c6fda0d
-
 def add_line(Ctype):
     patient = raw_input("Enter patient HCN: ")
     chart = raw_input("Enter chart ID: ")
 
-<<<<<<< HEAD
     c.execute("SELECT chart_id FROM charts WHERE edate IS NULL AND chart_id = :chart AND hcno = :patient ;",{"chart":chart, "patient":patient})
     if not c.fetchone():
         print "Chart does not exist or is not open."
         return
+
     if Ctype != "M":
         content = raw_input("Enter the content of the chart: ")
-=======
-    #c.execute(INSERT INTO symptoms ())
-    return
->>>>>>> 25fdc5ace2511a86465b77890fdd10650c6fda0d
 
     if Ctype == "S":
         c.execute("INSERT INTO symptoms VALUES ('{0}', '{1}' , '{2}' , datetime('now') , '{3}' ) ;".format (patient, chart, user[1], content) )
@@ -110,7 +97,7 @@ def add_med(patient, chart):
     if drug_name == '0': return
     # Check that drug exists.
     c.execute("SELECT * FROM drugs WHERE drug_name LIKE :drug_name;", {"drug_name":drug_name})
-    # if drug does not exist, promt user for another one.
+    # if drug does not exist, prompt user for another one.
     test = c.fetchone()
     while not test:
         print("Invalid name")
@@ -118,6 +105,7 @@ def add_med(patient, chart):
         if drug_name == '0': return
         c.execute("SELECT * FROM drugs WHERE drug_name LIKE :drug_name;", {"drug_name":drug_name})
         test = c.fetchone()
+
 # check allergy
     allergic = False
     c.execute("SELECT * FROM reportedallergies WHERE drug_name LIKE :drug_name AND hcno = :patient ;", {"drug_name":drug_name, "patient":patient})
