@@ -9,22 +9,34 @@ conn = sqlite3.connect("hospital.db")
 c = conn.cursor()
 
 # Nurses tasks
-
+# 1. This query closes a chart
 def nurse_q1(hcno):
-    
+    # check if hcno matches one in system
     c.execute('SELECT hcno FROM patients p WHERE p.hcno=:hcno;',{'hcno':hcno})
-    if not c.fetchone():
+    if not c.fetchone(): # if hcno is not in the system
         print 'This Patient does not exist in our system'
         
+    # if the patient exists
     else:
+        # check if it has an open file, a null edate
         c.execute('SELECT c.chart_id FROM charts c, patients p WHERE c.hcno = p.hcno AND c.edate is NULL AND c.hcno=:hcno;', {"hcno":hcno})
-        chart = c.fetchone()
-    
+        chart = c.fetchall() # this contains tuples of open charts
+        #print ch
+        
         if not chart:
             print "This Chart has already been closed"
             
         else:   
-            c.execute('UPDATE charts SET edate = datetime() WHERE edate is NULL AND hcno=:hcno;', {"hcno": hcno}) 
+            ch = str(chart[0][0])
+            c.execute("UPDATE charts SET edate = datetime('now') WHERE edate is NULL AND hcno=:hcno;", {"hcno": hcno}) 
+            conn.commit()
+            c.execute("SELECT * FROM charts WHERE chart_id=:chart;", {"chart":ch})
+            updated = c.fetchall() 
+            for i in range(len(updated)):
+                chart_info = []
+                for j in range(len(updated[i])):
+                    chart_info.append(str(updated[i][j]))
+                print '| '.join(chart_info)            
             print 'Patient ' + hcno + ' has been discharged.' 
  
 #Create a new chart for a patient at the time of admission to the hospital. 
@@ -40,18 +52,23 @@ def nurse_q1(hcno):
 def nurse_q2():
     patient = raw_input('Please enter your HCNO: ')
     
-    # check if admitted date is filled in 
+    # check if admitted date is filled in to see if patient exists in the system 
     c.execute('SELECT hcno FROM charts WHERE hcno=:hcno AND adate is not NULL;',{'hcno':patient}) 
-    charts = c.fetchall()
+    patient_charts = c.fetchall()
     
-    if len(charts) == 0:
+    if len(patient_charts) == 0:
+        print 'create a new patient'
         create_patient(patient)
     
+    # if hcno exists
     else:
         # check if chart is open
         c.execute('SELECT hcno FROM charts WHERE hcno=:hcno AND edate is NULL;', {'hcno':patient})
-        chart = c.fetchone()
-        if not chart: # empty query, means edate is full, already closed 
+        open_chart = c.fetchone()
+        print open_chart
+        
+        if not open_chart: # empty query, means edate is full, already closed 
+            print "Let's make a new chart for this visit"
             create_chart(patient)
         else:
             # query found something, there is an open chart
@@ -59,6 +76,7 @@ def nurse_q2():
             answer = raw_input("Please select Y or N: ")
             if answer == 'Y':
                 c.execute('UPDATE charts SET edate = datetime() WHERE edate is NULL AND hcno=:hcno;', {"hcno": patient})
+                conn.commit()
                 create_chart(patient)
             else: # N
                 pass
@@ -72,14 +90,53 @@ def create_patient(patient):
     phone = raw_input("Enter your phone number: ")
     emerg = raw_input("Enter your emergency contact number :")
         
-    c.execute("INSERT INTO patients VALUES('{0}','{1}','{2}','{3}','{4}','{5}');".format(patient, name, age, address, phone, emerg))  
+    c.execute("INSERT INTO patients VALUES('{0}','{1}','{2}','{3}','{4}','{5}');".format(patient, name, age, address, phone, emerg))
+    conn.commit()
+    c.execute("SELECT * FROM patients WHERE hcno=:hcno;",{'hcno':patient})
+    user = c.fetchall()
+    
+    print "HCNO|Patient Name|Age Group|Address|Phone Number|Emergency Contact"   
+    for i in range(len(user)):
+        u = []
+        for j in range(len(user[i])):
+            u.append(str(user[i][j]))
+        print '    |' .join(u)    
+    
     print 'You are now in our system'
-    return
+    
 
 def create_chart(patient):
+    c.execute("SELECT chart_id FROM charts")
+    all_chart_id = c.fetchall()
+    
+    # gets a list of all chart id's
+    for i in range(len(all_chart_id)):
+        aci = [] # holds all the existing chart id's
+        for j in range(len(all_chart_id[i])):
+            aci.append(str(all_chart_id[i][j]))     
+    
+    # generate a chart id
     c_id = (''.join(random.choice(string.digits) for i in range(3)))
+    
+    for x in range(len(aci)):
+        # if chart id already exists
+        if x == aci:
+            c_id = (''.join(random.choice(string.digits) for i in range(3)))
+        else:
+            pass
+            
     c.execute("INSERT INTO charts VALUES ('{0}', '{1}', datetime('now'), '{2}');".format(c_id, patient, 'NULL'))
-    return
+    c.fetchall()
+    conn.commit()
+    
+    c.execute("SELECT * FROM charts WHERE chart_id=:chartid;", {'chartid':c_id})
+    new_chart = c.fetchall()
+    for i in range(len(new_chart)):
+        new = [] # holds all the existing chart id's
+        for j in range(len(new_chart[i])):
+            new.append(str(new_chart[i][j])) 
+    print new
+            
 
 # 3. same as doctors 1
 
