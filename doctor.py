@@ -47,11 +47,11 @@ def list_entries(chart_id, patient):
 
 def add_symptom(patient, chart, ):
     # ('10000', '000','123', '2010-10-02','uncontrollable gas' )
-    time = datetime.now().isoformat()
-    line = patient chart user[3] time
+   # time = datetime.now().isoformat()
+   # line = patient chart user[3] time
 
 
-    c.execute(INSERT INTO symptoms ())
+    #c.execute(INSERT INTO symptoms ())
     return
 
 # 3. For a given patient and an open chart of the patient add an entry for

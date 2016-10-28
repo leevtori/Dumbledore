@@ -1,11 +1,12 @@
 from authentication import *
 from doctor import *
 from admin import *
+from nurse import *
 
 # user log in
-user = None
-while not user:
-    user = authenticate()
+#user = None
+#while not user:
+#    user = authenticate()
 # user[0] = role
 # user[1] = staff id
 
@@ -18,10 +19,10 @@ ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
 print "Available operations: ",
 if user[0] == "D":
      print ' ,'.join(DOC)
-elif user[0] == "N":
+elif user[1] == "N":
      print ' ,'.join(NURSE)
 else:
-    print ' ,'.join(ADMIN)
+     print ' ,'.join(ADMIN)
 
 while True:
      op = raw_input("Please enter an operation or 'logout' to quit: ").lower()
@@ -29,9 +30,8 @@ while True:
      if user[0] == "D":
           if op == "search":
                get_chart()
-
           elif op == "add":
-               line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ").upper()
+               line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ").upper()  
                while line_type not in "SDM":
                     line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ")
                     if line_type == '0':
