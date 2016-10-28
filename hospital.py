@@ -1,16 +1,20 @@
-#from doctor import *
+from authentication import *
+from doctor import *
 from admin import *
 
-user = ['A']
+# user log in
+user = None
+while not user:
+    user = authenticate()
+# user[0] = role
+# user[1] = staff id
+
 # commands:
 DOC = ['search', 'add']
 NURSE = []
 ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
-# user[0] = role
-# user[1] = staff id
 
 # After user logs in, continuously ask what to do until they log out.
-
 print "Available operations: ",
 if user[0] == "D":
      print ' ,'.join(DOC)
@@ -34,7 +38,7 @@ while True:
                          break
                if line_type == '0':
                     continue
-                              
+
                add_line(line_type)
 
           elif op == 'logout':
@@ -48,20 +52,19 @@ while True:
      if user[0] == "A":
           if op == "doctor_sum":
                admin_query1()
-               
+
           elif op == "drug_sum":
                admin_query2()
-               
+
           elif op == "pos_med":
                admin_query3()
-               
+
           elif op == "pos_diag":
                admin_query4()
           elif op == "logout":
                print "Goodbye!"
                break
-          
+
           #NURSE
      elif user[0] == "N":
           pass
-          
