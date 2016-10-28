@@ -1,42 +1,35 @@
 from authentication import *
 from doctor import *
 from admin import *
-from nurse import *
 
-# user log in
-user = None
-while not user:
-     user = authenticate()
-# user[0] = name
-# user[1] = role
+# user[0] = role
+# user[1] = staff id
 
 # commands:
 DOC = ['search', 'add']
-NURSE = ['close_chart', 'create_chart']
+NURSE = []
 ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
 
 # After user logs in, continuously ask what to do until they log out.
 print "Available operations: ",
-if user[1] == "D":
-     print ' ,'.join(DOC)
-elif user[1] == "N":
-     print ' ,'.join(NURSE)
+if user[0] == "D":
+     print ','.join(DOC)
+elif user[0] == "N":
+     print ', '.join(NURSE)
 else:
-     print ' ,'.join(ADMIN)
+    print ', '.join(ADMIN)
 
 while True:
      op = raw_input("Please enter an operation or 'logout' to quit: ").lower()
-     if op == "logout":
-          print "Goodbye!"
-          break
      #Doctors
-     if user[1] == "D":
+     if user[0] == "D":
           if op == "search":
                get_chart()
+
           elif op == "add":
-               line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ").upper()  
+               line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ").upper()
                while line_type not in "SDM":
-                    line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ")
+                    line_type = raw_input("Enter line type ('S','D','M' or '0' to exit): ").upper()
                     if line_type == '0':
                          break
                if line_type == '0':
@@ -52,7 +45,7 @@ while True:
                print "Invalid Command"
 
      #ADMIN
-     if user[1] == "A":
+     if user[0] == "A":
           if op == "doctor_sum":
                admin_query1()
 
@@ -69,11 +62,5 @@ while True:
                break
 
           #NURSE
-     elif user[1] == "N":
-          if op == "close_chart":
-               nurse_q1()
-          elif op == "create_chart":
-               nurse_q2()
-          elif op == "logout":
-               print "Goodbye!"
-               break          
+     elif user[0] == "N":
+          pass
