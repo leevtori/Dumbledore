@@ -28,7 +28,7 @@ GROUP BY drugs.category,medications.drug_name;
 --of the medication for the given diagnosis.
 select medications.drug_name as possible_medications
 from medications, diagnoses
-where diagnoses.diagnosis='worms'
+where diagnoses.diagnosis='food poisoning'
 and julianday(medications.mdate)>=julianday(diagnoses.ddate)
 group by medications.drug_name
 order by count(*) DESC;

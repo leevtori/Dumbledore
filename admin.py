@@ -22,6 +22,10 @@ def admin_query1():
     result_list = c.fetchall()
     print "Doctor  |Drug  |Total Amount"
     print "--------------------------------"
+
+    if (len(result_list) == 0):
+        print "None to display"
+
     for i in range(len(result_list)):
         s = []
         for j in range(len(result_list[i])):
@@ -50,6 +54,10 @@ def admin_query2():
     result_list = c.fetchall()
     print "Category  |Drug  |Total Amount"
     print "--------------------------------"
+
+    if (len(result_list) == 0):
+        print "None to display"
+
     for i in range(len(result_list)):
         s = []
         for j in range(len(result_list[i])):
@@ -64,16 +72,21 @@ def admin_query3():
 
     print("List for a given diagnosis all possible medications that have been prescribed over time after that diagnosis.\n")
 
-    diagnosis=" "
-    while diagnosis.isalpha() == False:
+    diagnosis = "1"
+    while all(x.isalpha() or x.isspace() for x in diagnosis) == False:
         diagnosis = raw_input("Enter diagnosis name: ")
-    diagnosis=diagnosis.lower()
+
+    diagnosis = diagnosis.lower()
 
     c.execute("select medications.drug_name as possible_medications from medications, diagnoses where lower(diagnoses.diagnosis)= :diagnosis and julianday(medications.mdate)>=julianday(diagnoses.ddate) group by medications.drug_name order by count(*) DESC;",{"diagnosis":diagnosis})
     
     result_list = c.fetchall()
     print "Possible Medications"
     print "--------------------------------"
+
+    if (len(result_list) == 0):
+        print "None to display"
+
     for i in range(len(result_list)):
         s = []
         for j in range(len(result_list[i])):
@@ -86,16 +99,18 @@ def admin_query3():
 def admin_query4():
     print("List for a given drug all the diagnoses that have been made before prescribing the drug.\n")
 
-    drug=" "
-    while drug.isalpha() == False:
+    drug = "1"
+    while all(x.isalpha() or x.isspace() for x in drug) == False:
         drug = raw_input("Enter drug name: ")
-    drug=drug.lower()
+    drug = drug.lower()
 
     c.execute("select diagnoses.diagnosis as previous_diagnoses from diagnoses,medications where lower(medications.drug_name)=:drug and julianday(diagnoses.ddate)<julianday(medications.mdate) group by previous_diagnoses order by AVG(medications.amount);",{"drug":drug})
 
     result_list = c.fetchall()
     print "Previous Diagnoses"
     print "--------------------------------"
+    if (len(result_list) == 0):
+        print "None to display"
     for i in range(len(result_list)):
         s = []
         for j in range(len(result_list[i])):
