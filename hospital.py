@@ -40,11 +40,11 @@ while True:
                     break
                 if line_type == '0':
                     continue
-                add_line(line_type)
+            add_line(line_type)
 
         elif op == 'logout':
             print "Goodbye!"
-            break
+            authenticate()
 
         else:
             print "Invalid Command"
@@ -65,7 +65,7 @@ while True:
 
         elif op == "logout":
             print "Goodbye!"
-            break
+            authenticate()
 
           #NURSE
     elif user[0] == "N":
@@ -80,4 +80,4 @@ while True:
             nurse_q4()
         elif op == "logout":
             print "Goodbye!"
-            break
+            authenticate()
