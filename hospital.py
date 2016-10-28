@@ -6,7 +6,7 @@ from nurse import *
 
 # commands:
 DOC = ['search', 'add']
-NURSE = ['close_chart', 'create_chart', 'list_all', 'add_line']
+NURSE = ['close_chart', 'create_chart', 'list_all', 'add_symptom']
 ADMIN = ['doctor_sum','drug_sum','pos_med','pos_diag']
 
 # After user logs in, continuously ask what to do until they log out.
@@ -76,7 +76,7 @@ while True:
             nurse_q2()
         elif op == "list_all":
             nurse_q3()
-        elif op == "add_line":
+        elif op == "add_symptom":
             nurse_q4()
         elif op == "logout":
             print "Goodbye!"
